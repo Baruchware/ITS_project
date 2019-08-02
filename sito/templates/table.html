@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Tabella - IoT Project
+{% endblock %}
+
+{% block content %}
+<div style="border-collapse: collapse">
+    <a href="{{url_for('table')}}"<span class="btn-toolset">Refresh table</span></a>
+    <table class="align-content: center change-back">
+        <tr>
+            <th style="border: 1px solid">Chiave primaria</th><th style="border: 1px solid">Data</th><th style="border: 1px solid">Temperatura</th><th style="border: 1px solid">Modalità</th><th style="border: 1px solid">Stato</th>
+        </tr>
+        {% if a %}
+        {% for elem in a %}
+        <tr>
+            <td style="border: 1px solid">{{ elem.id }}</td><td style="border: 1px solid"><strong>{{ elem.created_at.strftime('%H:%M on %d.%m.') }}</strong></td><td style="border: 1px solid">{{ elem.temperatura}}</td><td style="border: 1px solid">{{elem.mode}}</td><td style="border: 1px solid">{{ elem.stato}}</td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+    </table>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Controllo remoto
+{% endblock %}
+
+{% block content %}
+
+<article class="single-post-home">
+    <section>
+        Qui puoi scegliere in quale modalità fare andare il dispositivo
+    </section>  
+    <section>
+            <a href="{{ url_for('controlon') }}"><span class="btn-toolset">Accendi</span></a>
+            <a href="{{ url_for('controloff') }}"><span class="btn-toolset">Spegni</span></a>
+            <a href="{{ url_for('controlanalisi') }}"><span class="btn-toolset">Auto Analisi</span></a>
+            <a href="{{url_for('tablereset')}}"<span class="btn-toolset">Svuota Database</span></a>
+    </section>
+
+
+</article>
+
+
+{% endblock %}

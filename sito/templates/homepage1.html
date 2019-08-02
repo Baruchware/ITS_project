@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    titolo
+{% endblock %}
+
+
+{% block content %}
+    <div class="single-post-home">
+        <p class="smallaa">
+            Benvenuto!
+        </p>
+
+        {% if not current_user.is_authenticated %}
+        <p><strong>Digita le credenziali che ti ha fornito il tecnico!</strong></p>
+        {% endif %}
+
+        <p>Una volta autenticato, se clicchi su'tabella' dovresti poter guardare tutte le volte che il led si è acceso o si è spento con i relativi dati</p>
+
+        <p>Se clicchi su 'controllo remoto', dovresti poter accendere e spegnere a tuo piacimento il led dal sito web!</p>
+
+        <p>Se vuoi saperne più su di noi clicca su 'About us'</p>
+
+    </div>
+
+{% endblock %}
