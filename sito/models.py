@@ -1,15 +1,17 @@
 from datetime import datetime
-from flask_login import UserMixin
-from werkzeug.security import check_password_hash, generate_password_hash
-from sito import db, loginmanager
+from flask_login import UserMixin   #Se analizziamo UserMixin vediamo che ci sono funzione come is_authenticated , is_active, is_anonymous, get_id ecc...
+
+
+from werkzeug.security import check_password_hash, generate_password_hash   # librerie crittografia password
+from sito import db, loginmanager   #importo istanze create in __init__.py
 
 
 
-@loginmanager.user_loader
+@loginmanager.user_loader #attenzione che il decoratore in questo caso "loginmanager" deve essere la variabile loginmanager dichiarata prima in __init__.py
 def load_user(id):
     return User.query.get(int(id))  #serve per tenere traccia dell utente connesso
 
-
+#Aggiungiamo quindi UserMixin alla classe User per poter ottenere la possibilità di usare funzioni riguardante istanze in questa tabella
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)#creo una colonna nel database che supporti il tipo INTERO, ed evenutali altri parametri con prymary key
@@ -20,13 +22,14 @@ class User(UserMixin, db.Model):
 
 
     def __repr__(self):
-        return (f"User('{self.id}, {self.created_at}, { self.username}, {self.email}, {self.password}")
+        return (f"User('{self.id}, {self.created_at}, { self.username}, {self.email}, {self.password}") #senza questa funzione, se interroghiamo
+    #il database chiedendogli un istanza generale come User.query.first() ci risponderà per esempio : <User 1>, invece ora otteniamo un output desiderato.
 
     def set_password_hash(self, password):
-        self.password = generate_password_hash(password)
+        self.password = generate_password_hash(password) #hashing delle password, serve cosi a poterle camuffare
 
     def check_password(self, password):
-        return check_password_hash(self.password, password)
+        return check_password_hash(self.password, password) #nonostante la crittografia con questo metodo puoi ottenere True se la password è corretta
 
 
 class Info(db.Model):
