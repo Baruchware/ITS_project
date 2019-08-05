@@ -90,8 +90,10 @@ def analisi():
 
             x = Info(temperatura=temp, mode="auto", stato="ON")   #creo variabile con parametri per entrare nel database in tabella Info
 
-            db.session.add(x)             #aggiungo x al database
-            db.session.commit()     #effettuo cambiamenti al database
+            db.session.add(x)    #aggiungo x al database
+           
+            if flag == False:
+                db.session.commit()     #effettuo cambiamenti al database
             #grazie ad aver importato db e le tabelle posso aggiornare il database da programma
 
       	    # Se la temperatura è minore del valore limite il LED si spegne, se la flag è ancora falsa
@@ -106,7 +108,9 @@ def analisi():
             x = Info(temperatura=temp, mode="auto", stato="OFF")
 
             db.session.add(x)
-            db.session.commit()
+            
+            if flag == False:
+                db.session.commit()
 
 
 
